@@ -2,14 +2,23 @@
 
 Add your resources in the configuration:
 
-```json
-"Resources": [
-	"models/props_office/file_cabinet_03.vmdl",
-	"models/props_exteriors/guardrail512.vmdl",
-	..
-	..
-	..
-],
+```jsonc
+{
+  "Resources": [
+     "models/props_office/file_cabinet_03.vmdl",
+     "models/props_exteriors/guardrail512.vmdl",
+     // ..
+     // ..
+     // ..
+  ],
+  "CreatePrecacheContextSignature": {
+    // ...
+  },
+  "PrecacheResourceSignature": {
+    // ...
+  },
+  "ConfigVersion": 1
+}
 ```
 
 > [!WARNING]  
