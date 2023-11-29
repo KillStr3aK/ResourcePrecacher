@@ -1,8 +1,10 @@
 ﻿namespace ResourcePrecacher
 {
+    using CounterStrikeSharp.API;
     using CounterStrikeSharp.API.Core;
     using CounterStrikeSharp.API.Core.Plugin;
     using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
+    using CounterStrikeSharp.API.Modules.Utils;
     using CounterStrikeSharp.API.Modules.Memory;
 
     using Microsoft.Extensions.Logging;
@@ -95,6 +97,28 @@
             }
 
             return this.Resources.Remove(resourcePath);
+        }
+
+        public void EnsureContext()
+        {
+            Vector NULL_VECTOR = new Vector(IntPtr.Zero);
+            QAngle NULL_ANGLE = new QAngle(IntPtr.Zero);
+
+            // As we haven't even reached the precache context it should fail:
+            // WARNING: RESOURCE_TYPE_MODEL resource 'models/chicken/chicken.vmdl' (7A10E5899D1BF356) requested but is not in the system. (Missing from from a manifest?)
+            // TODO
+            CChicken? chicken = Utilities.CreateEntityByName<CChicken>("chicken");
+
+            if (chicken != null)
+            {
+                chicken.Teleport(NULL_VECTOR, NULL_ANGLE, NULL_VECTOR);
+                chicken.DispatchSpawn();
+
+                Server.NextFrame(() =>
+                {
+                    chicken.Remove();
+                });
+            }
         }
     }
 }
