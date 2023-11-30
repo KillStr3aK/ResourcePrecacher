@@ -19,7 +19,7 @@
          *    if ( (unsigned __int8)sub_18057A680() )
          *       return sub_180688390(a1, a2);
          *     sub_1806BE3C0(a1, a2);
-         *     sub_1808D36B0("models/chicken/chicken.vmdl", a2); <- this function = PrecacheResource
+         *     sub_1808D36B0("models/chicken/chicken.vmdl", a2); <- this function = PrecacheResource and 'a2' is the precache context
          *     sub_1808D36B0("particles/critters/chicken/chicken_gone.vpcf", a2);
          *     return sub_1808D36B0("particles/critters/chicken/chicken_roasted.vpcf", a2);
          * }
