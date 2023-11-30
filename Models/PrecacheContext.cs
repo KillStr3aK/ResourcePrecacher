@@ -46,6 +46,17 @@
             this.PluginContext = pluginContext;
         }
 
+        public void Initialize()
+        {
+            Plugin plugin = (this.PluginContext.Plugin as Plugin)!;
+
+            this.CreatePrecacheContext = new(plugin.Config.CreatePrecacheContextSignature.Get());
+            this.PrecacheResource = VirtualFunction.CreateVoid<string, nint>(plugin.Config.PrecacheResourceSignature.Get());
+
+            this.CreatePrecacheContext.Hook(this.InterceptPrecacheContext, HookMode.Pre);
+            this.CreatePrecacheContext.Hook(this.InterceptPrecacheContextPost, HookMode.Post);
+        }
+
         private HookResult InterceptPrecacheContext(DynamicHook hook)
         {
             nint precacheContext = hook.GetParam<nint>(1);
@@ -66,17 +77,6 @@
             this.CreatePrecacheContext.Unhook(this.InterceptPrecacheContext, HookMode.Pre);
             this.CreatePrecacheContext.Unhook(this.InterceptPrecacheContextPost, HookMode.Post);
             return HookResult.Continue;
-        }
-
-        public void Initialize()
-        {
-            Plugin plugin = (this.PluginContext.Plugin as Plugin)!;
-
-            this.CreatePrecacheContext = new(plugin.Config.CreatePrecacheContextSignature.Get());
-            this.PrecacheResource = VirtualFunction.CreateVoid<string, nint>(plugin.Config.PrecacheResourceSignature.Get());
-
-            this.CreatePrecacheContext.Hook(this.InterceptPrecacheContext, HookMode.Pre);
-            this.CreatePrecacheContext.Hook(this.InterceptPrecacheContextPost, HookMode.Post);
         }
 
         public bool AddResource(string resourcePath)
