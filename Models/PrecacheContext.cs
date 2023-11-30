@@ -54,7 +54,6 @@
             this.PrecacheResource = VirtualFunction.CreateVoid<string, nint>(plugin.Config.PrecacheResourceSignature.Get());
 
             this.CreatePrecacheContext.Hook(this.InterceptPrecacheContext, HookMode.Pre);
-            this.CreatePrecacheContext.Hook(this.InterceptPrecacheContextPost, HookMode.Post);
         }
 
         private HookResult InterceptPrecacheContext(DynamicHook hook)
@@ -62,20 +61,13 @@
             nint precacheContext = hook.GetParam<nint>(1);
             int precachedResources = 0;
 
-            foreach (var resourcePath in Resources)
+            foreach (string resourcePath in this.Resources)
             {
                 this.Logger.LogInformation("Precaching \"{Resource}\" (context: {PrecacheContext}) [{Amount}/{Count}]", resourcePath, $"0x{precacheContext:X}", ++precachedResources, this.ResourceCount);
                 PrecacheResource(resourcePath, precacheContext);
             }
 
             this.Logger.LogInformation("Precached {ResourceCount} resources.", this.ResourceCount);
-            return HookResult.Continue;
-        }
-
-        private HookResult InterceptPrecacheContextPost(DynamicHook hook)
-        {
-            this.CreatePrecacheContext.Unhook(this.InterceptPrecacheContext, HookMode.Pre);
-            this.CreatePrecacheContext.Unhook(this.InterceptPrecacheContextPost, HookMode.Post);
             return HookResult.Continue;
         }
 
@@ -99,26 +91,9 @@
             return this.Resources.Remove(resourcePath);
         }
 
-        public void EnsureContext()
+        public void Release()
         {
-            Vector NULL_VECTOR = new Vector(IntPtr.Zero);
-            QAngle NULL_ANGLE = new QAngle(IntPtr.Zero);
-
-            // As we haven't even reached the precache context it should fail:
-            // WARNING: RESOURCE_TYPE_MODEL resource 'models/chicken/chicken.vmdl' (7A10E5899D1BF356) requested but is not in the system. (Missing from from a manifest?)
-            // TODO
-            CChicken? chicken = Utilities.CreateEntityByName<CChicken>("chicken");
-
-            if (chicken != null)
-            {
-                chicken.Teleport(NULL_VECTOR, NULL_ANGLE, NULL_VECTOR);
-                chicken.DispatchSpawn();
-
-                Server.NextFrame(() =>
-                {
-                    chicken.Remove();
-                });
-            }
+            this.CreatePrecacheContext.Unhook(this.InterceptPrecacheContext, HookMode.Pre);
         }
     }
 }

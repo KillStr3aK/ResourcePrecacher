@@ -46,13 +46,16 @@
 
             base.RegisterListener<Listeners.OnMapStart>(map =>
             {
-                this.PrecacheContext.EnsureContext();
-
                 foreach (var resourcePath in this.Config.ResourceList)
                 {
                     this.PrecacheContext.AddResource(resourcePath);
                 }
             });
+        }
+
+        public override void Unload(bool hotReload)
+        {
+            this.PrecacheContext.Release();
         }
     }
 }
