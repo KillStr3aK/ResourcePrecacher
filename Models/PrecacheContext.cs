@@ -83,7 +83,7 @@
         {
             if (resourcePath.Contains('/'))
             {
-                resourcePath = resourcePath.Replace("/", "\\");
+                resourcePath = resourcePath.Replace('/', Path.DirectorySeparatorChar);
             }    
 
             return this.Resources.Add(resourcePath);
@@ -93,7 +93,7 @@
         {
             if (resourcePath.Contains('/'))
             {
-                resourcePath = resourcePath.Replace("/", "\\");
+                resourcePath = resourcePath.Replace('/', Path.DirectorySeparatorChar);
             }
 
             return this.Resources.Remove(resourcePath);
