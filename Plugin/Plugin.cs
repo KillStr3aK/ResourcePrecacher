@@ -52,5 +52,10 @@
                 }
             });
         }
+
+        public override void Unload(bool hotReload)
+        {
+            this.PrecacheContext.Release();
+        }
     }
 }
