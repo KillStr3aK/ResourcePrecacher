@@ -19,7 +19,7 @@
         {
             if (config.Version < this.Config.Version)
             {
-                Logger.LogWarning("Configuration is out of date. Consider updating the plugin.");
+                base.Logger.LogWarning("Configuration is out of date. Consider updating the plugin.");
             }
 
             if (string.IsNullOrEmpty(config.CreatePrecacheContextSignature.Get()))
@@ -30,6 +30,11 @@
             if (string.IsNullOrEmpty(config.PrecacheResourceSignature.Get()))
             {
                 throw new Exception("Signature is missing or invalid for 'PrecacheResource'");
+            }
+
+            if (config.ResourceList.Count == 0)
+            {
+                base.Logger.LogWarning("ResourceList is empty, did you forget to populate the list with resources?");
             }
 
             this.Config = config;
