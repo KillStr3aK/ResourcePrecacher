@@ -32,6 +32,8 @@
 
         public required Action<string, nint> PrecacheResource { get; set; }
 
+        public required Plugin Plugin;
+
         private HashSet<string> Resources = new HashSet<string>();
 
         private readonly ILogger<PrecacheContext> Logger;
@@ -48,10 +50,10 @@
 
         public void Initialize()
         {
-            Plugin plugin = (this.PluginContext.Plugin as Plugin)!;
+            this.Plugin = (this.PluginContext.Plugin as Plugin)!;
 
-            this.CreatePrecacheContext = new(plugin.Config.CreatePrecacheContextSignature.Get());
-            this.PrecacheResource = VirtualFunction.CreateVoid<string, nint>(plugin.Config.PrecacheResourceSignature.Get());
+            this.CreatePrecacheContext = new(this.Plugin.Config.CreatePrecacheContextSignature.Get());
+            this.PrecacheResource = VirtualFunction.CreateVoid<string, nint>(this.Plugin.Config.PrecacheResourceSignature.Get());
 
             this.CreatePrecacheContext.Hook(this.InterceptPrecacheContext, HookMode.Pre);
         }
@@ -63,11 +65,19 @@
 
             foreach (string resourcePath in this.Resources)
             {
-                this.Logger.LogInformation("Precaching \"{Resource}\" (context: {PrecacheContext}) [{Amount}/{Count}]", resourcePath, $"0x{precacheContext:X}", ++precachedResources, this.ResourceCount);
+                if (this.Plugin.Config.Log)
+                {
+                    this.Logger.LogInformation("Precaching \"{Resource}\" (context: {PrecacheContext}) [{Amount}/{Count}]", resourcePath, $"0x{precacheContext:X}", ++precachedResources, this.ResourceCount);
+                }
+                
                 PrecacheResource(resourcePath, precacheContext);
             }
 
-            this.Logger.LogInformation("Precached {ResourceCount} resources.", this.ResourceCount);
+            if (this.Plugin.Config.Log)
+            {
+                this.Logger.LogInformation("Precached {ResourceCount} resources.", this.ResourceCount);
+            }
+            
             return HookResult.Continue;
         }
 
