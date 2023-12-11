@@ -40,10 +40,10 @@
 
         public int ResourceCount => Resources.Count;
 
-        public PrecacheContext(ILogger<PrecacheContext> logger, PluginContext pluginContext)
+        public PrecacheContext(ILogger<PrecacheContext> logger, IPluginContext pluginContext)
         {
             this.Logger = logger;
-            this.PluginContext = pluginContext;
+            this.PluginContext = (pluginContext as PluginContext)!;
         }
 
         public void Initialize()
