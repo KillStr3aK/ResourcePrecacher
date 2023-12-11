@@ -7,6 +7,7 @@
     {
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<PluginMigrations>();
             serviceCollection.AddSingleton<PrecacheContext>();
         }
     }

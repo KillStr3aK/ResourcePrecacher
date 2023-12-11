@@ -12,8 +12,11 @@
 
         private readonly PrecacheContext PrecacheContext;
 
-        public Plugin(PrecacheContext context)
+        private readonly PluginMigrations Migrations;
+
+        public Plugin(PluginMigrations migrations, PrecacheContext context)
         {
+            this.Migrations = migrations;
             this.PrecacheContext = context;
         }
 
@@ -22,6 +25,14 @@
             if (config.Version < this.Config.Version)
             {
                 Logger.LogWarning("Configuration is out of date. Consider updating the plugin.");
+
+                if (this.Migrations.HasInstruction(config.Version, this.Config.Version))
+                {
+                    base.Logger.LogWarning("Instruction for migrating your config file: {0}", this.Migrations.GetInstruction(config.Version, this.Config.Version));
+                } else
+                {
+                    base.Logger.LogWarning("No migrating instruction available");
+                }
             }
 
             if (string.IsNullOrEmpty(config.CreatePrecacheContextSignature.Get()))
