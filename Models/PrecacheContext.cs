@@ -1,10 +1,8 @@
 ﻿namespace ResourcePrecacher
 {
-    using CounterStrikeSharp.API;
     using CounterStrikeSharp.API.Core;
     using CounterStrikeSharp.API.Core.Plugin;
     using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
-    using CounterStrikeSharp.API.Modules.Utils;
     using CounterStrikeSharp.API.Modules.Memory;
 
     using Microsoft.Extensions.Logging;
