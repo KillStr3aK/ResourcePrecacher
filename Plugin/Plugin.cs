@@ -32,6 +32,11 @@
                 throw new Exception("Signature is missing or invalid for 'PrecacheResource'");
             }
 
+            if (config.ResourceList.Count == 0)
+            {
+                base.Logger.LogWarning("'ResourceList' is empty, did you forget to populate the list with resources?");
+            }
+
             this.Config = config;
         }
 
