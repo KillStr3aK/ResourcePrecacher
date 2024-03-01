@@ -1,5 +1,6 @@
 > [!WARNING]  
-> *__This plugin is now obsolete and no longer needed as CS# has been updated with a builtin feature to ensure resource precaching correctly on both platforms.__*
+> ~~*__This plugin is now obsolete and no longer needed as CS# has been updated with a builtin feature to ensure resource precaching correctly on both platforms.__*~~
+> This plugin will be reworked to only support the precaching from a configuration file.
 
 # ResourcePrecacher
 This plugin intercepts a precache context and use that context to precache custom resources.
