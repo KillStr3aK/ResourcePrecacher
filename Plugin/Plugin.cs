@@ -5,7 +5,7 @@
 
     using Microsoft.Extensions.Logging;
 
-    [MinimumApiVersion(120)]
+    [MinimumApiVersion(195)]
     public sealed partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     {
         public required PluginConfig Config { get; set; } = new PluginConfig();
@@ -35,16 +35,6 @@
                 }
             }
 
-            if (string.IsNullOrEmpty(config.CreatePrecacheContextSignature.Get()))
-            {
-                throw new Exception("Signature is missing or invalid for 'CreatePrecacheContext'");
-            }
-
-            if (string.IsNullOrEmpty(config.PrecacheResourceSignature.Get()))
-            {
-                throw new Exception("Signature is missing or invalid for 'PrecacheResource'");
-            }
-
             if (config.ResourceList.Count == 0)
             {
                 base.Logger.LogWarning("'ResourceList' is empty, did you forget to populate the list with resources?");
@@ -61,19 +51,6 @@
             }
 
             this.PrecacheContext.Initialize();
-
-            base.RegisterListener<Listeners.OnMapStart>(map =>
-            {
-                foreach (var resourcePath in this.Config.ResourceList)
-                {
-                    this.PrecacheContext.AddResource(resourcePath);
-                }
-            });
-        }
-
-        public override void Unload(bool hotReload)
-        {
-            this.PrecacheContext.Release();
         }
     }
 }

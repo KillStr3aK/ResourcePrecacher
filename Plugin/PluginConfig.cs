@@ -11,10 +11,6 @@
 
         public bool Log { get; set; } = true;
 
-        public WIN_LINUX<string> CreatePrecacheContextSignature { get; set; } = new(string.Empty, string.Empty);
-
-        public WIN_LINUX<string> PrecacheResourceSignature { get; set; } = new(string.Empty, string.Empty);
-
-        public override int Version { get; set; } = 3;
+        public override int Version { get; set; } = 5;
     }
 }

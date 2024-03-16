@@ -6,6 +6,8 @@
         {
             this.AddMigration(1, 2, "You have to update the 'Windows' key inside 'CreatePrecacheContextSignature', and change the 'Version' to 2. (The latest example configuration is always available at: https://github.com/KillStr3aK/ResourcePrecacher/blob/master/public/addons/counterstrikesharp/configs/plugins/ResourcePrecacher/ResourcePrecacher.json)");
             this.AddMigration(2, 3, "You have to add a 'Log' key from your configuration, and change the 'Version' to 3. (The latest example configuration is always available at: https://github.com/KillStr3aK/ResourcePrecacher/blob/master/public/addons/counterstrikesharp/configs/plugins/ResourcePrecacher/ResourcePrecacher.json)");
+            this.AddMigration(3, 4, "[WINDOWS ONLY] Updated signatures, redownload the latest version. (The latest example configuration is always available at: https://github.com/KillStr3aK/ResourcePrecacher/blob/master/public/addons/counterstrikesharp/configs/plugins/ResourcePrecacher/ResourcePrecacher.json)");
+            this.AddMigration(4, 5, "Changed functionality, remove signature related config values. (The latest example configuration is always available at: https://github.com/KillStr3aK/ResourcePrecacher/blob/master/public/addons/counterstrikesharp/configs/plugins/ResourcePrecacher/ResourcePrecacher.json)");
         }
 
         public bool HasInstruction(int fromVersion, int toVersion)
