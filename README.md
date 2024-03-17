@@ -1,9 +1,8 @@
 > [!WARNING]  
-> ~~*__This plugin is now obsolete and no longer needed as CS# has been updated with a builtin feature to ensure resource precaching correctly on both platforms.__*~~
-> This plugin will be reworked to only support the precaching from a configuration file.
+> This plugin has been reworked to only support the precaching functionality from a configuration file.
 
 # ResourcePrecacher
-This plugin intercepts a precache context and use that context to precache custom resources.
+This plugin can precache custom resources.
 
 # What can it do
 You can add any number of resources in the configuration and it will automatically precache them when the map starts.
@@ -29,12 +28,6 @@ Add your resources in the configuration:
      // ..
      // ..
   ],
-  "CreatePrecacheContextSignature": {
-    // ...
-  },
-  "PrecacheResourceSignature": {
-    // ...
-  },
   "ConfigVersion": 1
 }
 ```
