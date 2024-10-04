@@ -5,7 +5,7 @@
 
     using Microsoft.Extensions.Logging;
 
-    [MinimumApiVersion(195)]
+    [MinimumApiVersion(271)]
     public sealed partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     {
         public required PluginConfig Config { get; set; } = new PluginConfig();
