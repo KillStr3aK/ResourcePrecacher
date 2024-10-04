@@ -10,7 +10,7 @@
 
         public override string ModuleDescription => "Automatically precache resources.";
 
-        public override string ModuleVersion => "1.0.6 " +
+        public override string ModuleVersion => "1.0.7 " +
 #if RELEASE
             "(release)";
 #else
