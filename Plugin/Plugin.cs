@@ -54,7 +54,10 @@
 
             foreach (var resourcePath in this.Config.ResourceList)
             {
-                this.PrecacheContext.AddResource(resourcePath);
+                if (!this.PrecacheContext.AddResource(resourcePath))
+                {
+                    this.Logger.LogError("Duplicate entry for resource: '{0}'", resourcePath);
+                }
             }
         }
     }
