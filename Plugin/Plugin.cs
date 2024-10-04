@@ -56,7 +56,7 @@
             {
                 if (!this.PrecacheContext.AddResource(resourcePath))
                 {
-                    this.Logger.LogError("Duplicate entry for resource: '{0}'", resourcePath);
+                    this.Logger.LogWarning("Duplicate entry for resource: '{0}'", resourcePath);
                 }
             }
         }
