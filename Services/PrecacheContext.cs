@@ -15,7 +15,7 @@
 
         private readonly PluginContext PluginContext;
 
-        public int ResourceCount => Resources.Count;
+        public int ResourceCount => this.Resources.Count;
 
         public PrecacheContext(ILogger<PrecacheContext> logger, IPluginContext pluginContext)
         {
