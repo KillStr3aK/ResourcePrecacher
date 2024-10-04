@@ -24,7 +24,7 @@
         {
             if (config.Version < this.Config.Version)
             {
-                Logger.LogWarning("Configuration is out of date. Consider updating the plugin.");
+                this.Logger.LogWarning("Configuration is out of date. Consider updating the plugin.");
 
                 if (this.Migrations.HasInstruction(config.Version, this.Config.Version))
                 {
