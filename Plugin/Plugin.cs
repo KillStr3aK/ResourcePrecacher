@@ -47,12 +47,12 @@
         {
             if (hotReload)
             {
-                Logger.LogWarning("Hotreloading {ModuleName} has no effect.", this.ModuleName);
+                this.Logger.LogWarning("Hotreloading {ModuleName} has no effect.", this.ModuleName);
             }
 
             this.PrecacheContext.Initialize();
 
-            foreach (var resourcePath in this.Config.ResourceList)
+            foreach (string resourcePath in this.Config.ResourceList)
             {
                 if (!this.PrecacheContext.AddResource(resourcePath))
                 {
