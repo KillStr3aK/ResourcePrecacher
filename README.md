@@ -4,6 +4,8 @@
 # ResourcePrecacher
 This plugin can precache custom resources.
 
+- Required CS# version: **artifact v271**
+
 # What can it do
 You can upload or add any number of resources either in the `Assets` folder or in the configuration file and it will automatically precache them when the map starts.
 
