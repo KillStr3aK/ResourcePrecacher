@@ -35,11 +35,6 @@
                 }
             }
 
-            if (config.ResourceList.Count == 0)
-            {
-                base.Logger.LogWarning("'ResourceList' is empty, did you forget to populate the list with resources?");
-            }
-
             this.Config = config;
         }
 
@@ -51,6 +46,11 @@
             }
 
             this.PrecacheContext.Initialize();
+
+            if (this.Config.ResourceList.Count == 0)
+            {
+                base.Logger.LogWarning("'ResourceList' is empty, did you forget to upload the workshop packagre, or populate the list with resources?");
+            }
 
             foreach (string resourcePath in this.Config.ResourceList)
             {
