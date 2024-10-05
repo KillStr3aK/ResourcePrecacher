@@ -58,7 +58,7 @@
         {
             this.Plugin = (this.PluginContext.Plugin as Plugin)!;
 
-            foreach (string vpkPath in Directory.EnumerateFiles(this.AssetsDirectory))
+            foreach (string vpkPath in Directory.EnumerateFiles(this.AssetsDirectory, "*.vpk"))
             {
                 string packageName = Path.GetFileNameWithoutExtension(vpkPath);
 
