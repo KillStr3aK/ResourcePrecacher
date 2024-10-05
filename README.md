@@ -1,5 +1,5 @@
-> [!WARNING]  
-> This plugin has been reworked to only support the precaching functionality from a configuration file.
+> [!IMPORTANT]  
+> Now supports loading resources from VPK files.
 
 # ResourcePrecacher
 This plugin can precache custom resources.
@@ -17,6 +17,21 @@ It cannot download the resources for the clients.
 
 # Configuration
 
+Upload your assets into the "Assets" folder inside the plugin folder. (`plugins/ResourcePrecacher/Assets`)
+You don't have to list these, each of them will be checked so you can upload as many as possible.
+
+Folder Structure:
+
+plugins
+ - ResourcePrecacher
+    - Assets
+        - 123456789.vpk
+        - 987654321.vpk
+        - assets.vpk
+        - models.vpk
+
+**OR**
+
 Add your resources in the configuration:
 
 ```jsonc
@@ -27,7 +42,8 @@ Add your resources in the configuration:
      // ..
      // ..
      // ..
-  ],
-  "ConfigVersion": 1
+  ]
 }
 ```
+
+You can use both ways even together, just dont include resources that is already in an uploaded vpk.
