@@ -83,6 +83,9 @@
                             {
                                 string fullPath = entry.GetFullPath();
 
+                                if (fullPath.EndsWith("_c"))
+                                    fullPath = fullPath[.. ^ 2];
+
                                 if (!this.AddResource(fullPath))
                                 {
                                     this.Logger.LogWarning("Duplicate entry for resource: '{0}'", fullPath);
