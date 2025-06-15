@@ -60,6 +60,10 @@
 
             foreach (string vpkPath in Directory.EnumerateFiles(this.AssetsDirectory, "*.vpk", SearchOption.AllDirectories))
             {
+                // we can only read the `_dir` vpks
+                if (vpkPath.EndsWith("_000.vpk"))
+                    continue;
+
                 string packageName = Path.GetFileNameWithoutExtension(vpkPath);
 
                 using (Package package = new Package())
